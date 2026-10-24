@@ -484,10 +484,11 @@ button:focus-visible {
 }
 
 /* ===== 詳細ページ ===== */
+/* 左右の端に固定した切り替え矢印と重ならないよう、横の余白を広めにとる */
 .detail {
   max-width: var(--width-max);
   margin: 0 auto;
-  padding: 32px 20px 72px;
+  padding: 32px 96px 72px;
 }
 
 .detail__back {
@@ -504,31 +505,52 @@ button:focus-visible {
 
 .detail__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+  gap: 56px;
   align-items: start;
 }
 
 /* 画像と左右の矢印 */
 .viewer {
   position: relative;
-  padding: 0 56px;
 }
 
+/* 画像を横一列に並べ、横スクロール(スワイプ)で1枚ずつぴたっと止まるようにする */
 .viewer__stage {
-  max-width: 640px;
+  display: flex;
+  max-width: 680px;
   margin: 0 auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  cursor: grab;
 }
 
+.viewer__stage::-webkit-scrollbar {
+  display: none;
+}
+
+.viewer__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  border: none;
+  border-radius: 0;
+}
+
+/* 立ち絵を切り替える矢印は、画面の左右の端に固定する */
 .viewer__arrow {
-  position: absolute;
+  position: fixed;
+  z-index: 5;
   top: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin-top: -22px;
+  width: 52px;
+  height: 52px;
+  margin-top: -26px;
   padding: 0;
   color: var(--color-text);
   background-color: var(--color-overlay);
@@ -548,22 +570,15 @@ button:focus-visible {
 }
 
 .viewer__arrow--prev {
-  left: 0;
+  left: 24px;
 }
 
 .viewer__arrow--next {
-  right: 0;
+  right: 24px;
 }
 
 .viewer__arrow[hidden] {
   display: none;
-}
-
-.viewer__count {
-  margin: 12px 0 0;
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--color-muted);
 }
 
 /* 商品情報 */
@@ -598,6 +613,50 @@ button:focus-visible {
 
 .spec__value {
   margin: 0;
+}
+
+/* 今どの画像を見ているかを示す点(2枚目以降がある商品だけ) */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.dots[hidden] {
+  display: none;
+}
+
+/* 押しやすいようにボタン自体は大きめにし、中の点だけを小さく見せる */
+.dots__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dots__button::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-line);
+  border-radius: 999px;
+  transition: width 0.2s, background-color 0.2s;
+}
+
+.dots__button:hover::before {
+  background-color: var(--color-muted);
+}
+
+.dots__button--active::before,
+.dots__button--active:hover::before {
+  width: 24px;
+  background-color: var(--color-accent);
 }
 
 /* 画像の切り替え(2枚目以降がある商品だけ) */
@@ -783,14 +842,25 @@ button:focus-visible {
     gap: 32px;
   }
 
-  .viewer {
-    padding: 0 48px;
+  .detail {
+    padding: 24px 20px 56px;
   }
 
+  /* スマホでは文章に重ならないよう固定をやめ、画像の左右の端(=画面の端)に置く */
   .viewer__arrow {
+    position: absolute;
+    top: calc((100vw - 40px) / 2);
     width: 40px;
     height: 40px;
     margin-top: -20px;
+  }
+
+  .viewer__arrow--prev {
+    left: -12px;
+  }
+
+  .viewer__arrow--next {
+    right: -12px;
   }
 
   .item-list {

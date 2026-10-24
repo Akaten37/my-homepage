@@ -1,16 +1,24 @@
 // ===== 商品データ =====
 // 商品を増やすときは、{ ... } のかたまりをコピーして追加します。
 // id          : 商品ごとに違う半角英数字(URLに使われます)
+// creator     : 作ったクリエイターの名前。わからないときは "" のままにすると表示されません
 // tags        : 複数つけられます。例 ["女性", "学生"]
 // images      : 画像のパス。1枚目が一覧に表示され、2枚目以降は詳細ページで切り替えられます
 // specs       : 詳細ページの情報欄。[項目名, 内容] の組を好きなだけ書けます
 // boothUrl    : その商品のBOOTHページのURL(いまはショップのトップを入れてあります)
 const SHOP_URL = "https://goratenia.booth.pm/";
 
+// 詳細ページで、商品の画像の最後に自動で付ける注意事項の画像(タグで選びます)
+const NOTICE_IMAGES = {
+  "男性": "img/ごらてにあ_注意事項_青.png",
+  "女性": "img/ごらてにあ_注意事項_赤.png"
+};
+
 const ITEMS = [
   {
     id: "item11",
-    name: "女性マネージャー",
+    name: "眼鏡美人女性マネージャー",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_女性マネージャー.png", "img/ごらてにあ_女性マネージャー_02.png"],
     description: "丸眼鏡に赤いネクタイをつけた、仕事のできる雰囲気の女性の全身立ち絵です。眼鏡あり・なしの差分がついています。",
@@ -20,6 +28,7 @@ const ITEMS = [
   {
     id: "item15",
     name: "地雷女子",
+    creator: "nale",
     tags: ["女性"],
     images: ["img/ごらてにあ_地雷女子.png"],
     description: "青紫の髪に紫のカーディガン、編み上げブーツ姿で、あざとくほほえむ全身立ち絵です。",
@@ -29,6 +38,7 @@ const ITEMS = [
   {
     id: "item16",
     name: "包容力のある中年女性",
+    creator: "スグメルト",
     tags: ["女性"],
     images: ["img/ごらてにあ_包容力のある中年女性.png", "img/ごらてにあ_包容力のある中年女性_02.png"],
     description: "眼鏡をかけ、ゆったりと髪をまとめた、包容力を感じさせる女性の全身立ち絵です。眼鏡あり・なしの差分がついています。",
@@ -38,6 +48,7 @@ const ITEMS = [
   {
     id: "item09",
     name: "メスガキ",
+    creator: "スグメルト",
     tags: ["女性"],
     images: ["img/ごらてにあ_メスガキ.png"],
     description: "ツインテールにパーカーワンピース姿で、こちらを見て笑う小悪魔風の全身立ち絵です。",
@@ -47,6 +58,7 @@ const ITEMS = [
   {
     id: "item13",
     name: "赤髪長髪少女",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_赤髪長髪少女.png"],
     description: "足元まで届く赤い長髪に、白いワンピースを着た少女の全身立ち絵です。",
@@ -56,6 +68,7 @@ const ITEMS = [
   {
     id: "item03",
     name: "カフェ店員",
+    creator: "線画:nale/塗り:AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_カフェ店員.png"],
     description: "ポニーテールに赤いエプロン姿の、カフェで働く女性の全身立ち絵です。",
@@ -65,6 +78,7 @@ const ITEMS = [
   {
     id: "item05",
     name: "シスター",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_シスター.png"],
     description: "目隠しをした、穏やかな微笑みの修道女の全身立ち絵です。",
@@ -74,6 +88,7 @@ const ITEMS = [
   {
     id: "item12",
     name: "親しみやすい青年",
+    creator: "かに",
     tags: ["男性"],
     images: ["img/ごらてにあ_親しみやすい青年.png"],
     description: "緑のジャケットにジーンズ姿の、穏やかで親しみやすい青年の全身立ち絵です。",
@@ -83,6 +98,7 @@ const ITEMS = [
   {
     id: "item07",
     name: "タバコスーツ男性",
+    creator: "かに",
     tags: ["男性"],
     images: ["img/ごらてにあ_タバコスーツ男性.png", "img/ごらてにあ_タバコスーツ男性_02.png"],
     description: "緑のジャケットを着てタバコを持つ、気だるい雰囲気の男性の全身立ち絵です。煙あり・なしの差分がついています。",
@@ -92,6 +108,7 @@ const ITEMS = [
   {
     id: "item04",
     name: "クールな男子高校生",
+    creator: "かに",
     tags: ["男性"],
     images: ["img/ごらてにあ_クールな男子高校生.png"],
     description: "赤髪にヘッドホンをかけた、クールな雰囲気の男子高校生の全身立ち絵です。",
@@ -101,6 +118,7 @@ const ITEMS = [
   {
     id: "item08",
     name: "ツン",
+    creator: "nale",
     tags: ["女性"],
     images: ["img/ごらてにあ_ツン.png"],
     description: "腕を組んで不機嫌そうにこちらを見る、長い黒髪の女子学生の全身立ち絵です。",
@@ -110,6 +128,7 @@ const ITEMS = [
   {
     id: "item06",
     name: "ダウナー系学生",
+    creator: "nale",
     tags: ["女性"],
     images: ["img/ごらてにあ_ダウナー系学生.png"],
     description: "青いメッシュの入った髪に、気だるげな表情の女子学生の全身立ち絵です。",
@@ -119,6 +138,7 @@ const ITEMS = [
   {
     id: "item02",
     name: "お嬢様の学生",
+    creator: "nale",
     tags: ["女性"],
     images: ["img/ごらてにあ_お嬢様の学生.png"],
     description: "三つ編みを入れた金髪ロングの、上品な雰囲気の女子学生の全身立ち絵です。",
@@ -128,6 +148,7 @@ const ITEMS = [
   {
     id: "item10",
     name: "元気でスポーティな女子",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_元気でスポーティな女子.png"],
     description: "大きなパーカーを着て敬礼のポーズをとる、明るく元気な女子の全身立ち絵です。",
@@ -137,6 +158,7 @@ const ITEMS = [
   {
     id: "item14",
     name: "大学生お酒女子",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_大学生お酒女子.png"],
     description: "缶を片手に笑う、金髪ロングで快活な大学生の全身立ち絵です。",
@@ -146,6 +168,7 @@ const ITEMS = [
   {
     id: "item01",
     name: "ミステリアス女子",
+    creator: "AkaTen",
     tags: ["女性"],
     images: ["img/ごらてにあ_ミステリアス女子.png", "img/ごらてにあ_ミステリアス女子_02.png"],
     description: "黒髪ロングで眼鏡をかけた、物静かな女子学生の全身立ち絵です。眼鏡あり・なしの差分がついています。",
