@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ごらてにあ | TRPG向け立ち絵素材</title>
+  <meta name="description" content="複数のクリエイターによるTRPG向け素材ショップ「ごらてにあ」の立ち絵紹介サイトです。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="header__logo" href="index.html">
+        <img class="header__logo-image" src="img/ごらてにあ_Logo_白_1200×1200.png" alt="" width="36" height="36">
+        <span class="header__logo-text">ごらてにあ</span>
+      </a>
+      <nav class="nav" aria-label="メインメニュー">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="index.html#items">立ち絵一覧</a></li>
+          <li class="nav__item"><a class="nav__link" href="index.html#creators">クリエイター</a></li>
+          <li class="nav__item"><a class="nav__link" href="index.html#shop">ショップ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero__inner">
+        <h1 class="hero__title">卓を彩る立ち絵が、ここにそろう。</h1>
+        <p class="hero__text">
+          「ごらてにあ」は、複数のクリエイターによるTRPG向け素材のショップです。
+          このサイトでは、BOOTHで販売中の立ち絵を紹介しています。
+        </p>
+        <a class="button" href="https://goratenia.booth.pm/" target="_blank" rel="noopener noreferrer"><span>BOOTHで素材を見る</span><span data-icon="open_in_new"></span></a>
+      </div>
+    </section>
+
+    <section class="section" id="items">
+      <div class="section__inner">
+        <h2 class="section__title">立ち絵一覧</h2>
+        <!-- タグのボタンと商品カードは script.js が items.js から自動で作ります -->
+        <div class="filter" id="filter" role="group" aria-label="タグで絞り込む"></div>
+        <div class="item-list" id="item-list"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="creators">
+      <div class="section__inner">
+        <h2 class="section__title">クリエイター</h2>
+        <ul class="creator-list" id="creator-list"></ul>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section__inner section__inner--narrow">
+        <h2 class="section__title">ショップについて</h2>
+        <p class="section__text">
+          購入は、BOOTHの「ごらてにあ」から行えます。更新頻度は不定期です。
+        </p>
+        <a class="button" href="https://goratenia.booth.pm/" target="_blank" rel="noopener noreferrer"><span>BOOTHのショップへ</span><span data-icon="open_in_new"></span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer__text">&copy; ごらてにあ</p>
+  </footer>
+
+  <script src="items.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

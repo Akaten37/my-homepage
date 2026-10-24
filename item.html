@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>立ち絵の詳細 | ごらてにあ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="header__logo" href="index.html">
+        <img class="header__logo-image" src="img/ごらてにあ_Logo_白_1200×1200.png" alt="" width="36" height="36">
+        <span class="header__logo-text">ごらてにあ</span>
+      </a>
+      <nav class="nav" aria-label="メインメニュー">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="index.html#items">立ち絵一覧</a></li>
+          <li class="nav__item"><a class="nav__link" href="index.html#creators">クリエイター</a></li>
+          <li class="nav__item"><a class="nav__link" href="index.html#shop">ショップ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail">
+    <a class="detail__back" href="index.html#items"><span data-icon="arrow_back"></span><span>立ち絵一覧に戻る</span></a>
+
+    <div class="detail__layout">
+
+      <!-- 左側:画像と、左右の切り替え矢印 -->
+      <div class="viewer">
+        <button class="viewer__arrow viewer__arrow--prev" id="prev-button" type="button" aria-label="前の立ち絵"><span data-icon="chevron_left"></span></button>
+        <div class="viewer__stage" id="stage"></div>
+        <button class="viewer__arrow viewer__arrow--next" id="next-button" type="button" aria-label="次の立ち絵"><span data-icon="chevron_right"></span></button>
+        <div class="gallery" id="gallery" hidden></div>
+        <p class="viewer__count" id="count" aria-live="polite"></p>
+      </div>
+
+      <!-- 右側:商品の情報 -->
+      <section class="info">
+        <h1 class="info__name" id="item-name"></h1>
+        <ul class="tag-list" id="item-tags"></ul>
+        <p class="info__description" id="item-description"></p>
+        <dl class="spec" id="item-specs"></dl>
+        <a class="button" id="item-link" href="https://goratenia.booth.pm/" target="_blank" rel="noopener noreferrer"><span>BOOTHで購入する</span><span data-icon="open_in_new"></span></a>
+      </section>
+
+    </div>
+
+    <!-- 注意事項 -->
+    <section class="notice" aria-labelledby="notice-title">
+      <h2 class="notice__title" id="notice-title">注意事項/禁止行為</h2>
+      <ul class="notice__list">
+        <li class="notice__item">商品の再配布、盗用、自作発言、販売する行為</li>
+        <li class="notice__item">画像生成AIをはじめとする、あらゆるAI学習への利用</li>
+        <li class="notice__item">原型を留めない過度な加工</li>
+        <li class="notice__item">公序良俗に反し、特定の企業や団体などを中傷し、その名誉や信用を損なう可能性のあるコンテンツでの使用</li>
+        <li class="notice__item">商品を使用したことによって発生した損害や損失について、制作者は一切の責任を負いません。</li>
+        <li class="notice__item">使用する場合のご連絡は不要</li>
+        <li class="notice__item">実績として、ポートフォリオやSNSに作品を掲載する場合がございます。予めご了承ください。</li>
+        <li class="notice__item">デジタルデータの性質上、ご購入後の返品・返金には対応いたしかねます。</li>
+        <li class="notice__item">著作権は制作者に帰属します。</li>
+        <li class="notice__item">著作権の譲渡はしておりません。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__text">&copy; ごらてにあ</p>
+  </footer>
+
+  <script src="items.js"></script>
+  <script src="item.js"></script>
+</body>
+</html>
