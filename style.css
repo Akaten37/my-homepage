@@ -234,76 +234,27 @@ button:focus-visible {
   min-height: 560px;
 }
 
+/* イラストを欄の高さいっぱいに置く。画像の左側に透明な余白があるので、
+   キャラクター部分(横幅の約57%の位置が中心)が欄の中央に来るようにずらす */
 .hero__illust {
   position: absolute;
   z-index: 1;
   bottom: 0;
   left: 50%;
   display: block;
-  height: 100%;
   width: auto;
-  transform: translateX(-50%);
-}
-
-/* 仮の画像用:見本シートの立ち絵部分だけを切り出し、周りをぼかして背景になじませる。
-   本番の画像(背景透過PNG)に差し替えたら、HTMLの hero__illust--temp を外してください */
-.hero__illust--temp {
-  width: 64%;
   height: 100%;
-  object-fit: cover;
-  object-position: 80% 20%;
-  -webkit-mask-image: radial-gradient(ellipse 50% 55% at 50% 45%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse 50% 55% at 50% 45%, #000 55%, transparent 100%);
-}
-
-.hero__card {
-  position: absolute;
-  width: clamp(110px, 12vw, 180px);
-  aspect-ratio: 1;
-  padding: 5px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px var(--color-sub-line), 0 14px 30px rgba(0, 0, 0, 0.45);
-}
-
-.hero__card img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero__card--1 {
-  top: 9%;
-  left: 2%;
-  transform: rotate(-6deg);
-}
-
-.hero__card--2 {
-  top: 11%;
-  right: 4%;
-  transform: rotate(4deg);
-}
-
-.hero__card--3 {
-  bottom: 14%;
-  left: -2%;
-  transform: rotate(-4deg);
-}
-
-.hero__card--4 {
-  bottom: 22%;
-  right: -3%;
-  transform: rotate(-8deg);
+  max-width: none;
+  transform: translateX(-57%);
 }
 
 .hero__hand {
   position: absolute;
   z-index: 2;
-  top: 36%;
-  right: 6%;
+  top: 2%;
+  right: 24%;
   display: block;
-  width: 160px;
+  width: 140px;
   height: auto;
 }
 
@@ -817,18 +768,10 @@ button:focus-visible {
     min-height: 420px;
   }
 
-  .hero__card {
-    width: 96px;
-  }
-
-  .hero__card--4 {
-    bottom: 6%;
-  }
-
   .hero__hand {
-    top: 44%;
-    right: 0;
-    width: 110px;
+    top: 0;
+    right: 30%;
+    width: 90px;
   }
 
   .section {
