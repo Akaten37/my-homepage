@@ -324,3 +324,40 @@ document.querySelectorAll(".header__logo-image, .hero img").forEach((image) => {
 document.querySelectorAll("[data-icon]").forEach((slot) => {
   slot.replaceChildren(createIcon(slot.dataset.icon));
 });
+// ===== スクロールでふわっと表示する =====
+// 画面に入ってきた要素に is-visible を付けて、CSSで下からふわっと出す。
+// 動きを減らす設定にしている人や、古いブラウザでは何もしない(最初から表示される)
+const revealObserver = "IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ? new IntersectionObserver((entries) => {
+    // 同時に画面に入ったカードは、左上から(ページ内の並び順に)少しずつ遅らせて出す
+    let order = 0;
+    entries
+      .filter((entry) => entry.isIntersecting)
+      .map((entry) => entry.target)
+      .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+      .forEach((element) => {
+        if (element.dataset.revealStagger) {
+          element.style.setProperty("--reveal-delay", order * 0.12 + "s");
+          order += 1;
+        }
+        element.classList.add("is-visible");
+        revealObserver.unobserve(element);
+      });
+  }, { rootMargin: "0px 0px -10% 0px" })
+  : null;
+
+// 要素をスクロール表示の対象にする。stagger を true にすると、並んだカードが左上から順に出てくる
+function revealOnScroll(elements, stagger) {
+  if (!revealObserver) {
+    return;
+  }
+  elements.forEach((element) => {
+    element.classList.add("reveal");
+    if (stagger) {
+      element.dataset.revealStagger = "true";
+    }
+    revealObserver.observe(element);
+  });
+}
+
+revealOnScroll(document.querySelectorAll(".section__title, .filter, .section__text, .section .button, .notice"), false);

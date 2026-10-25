@@ -32,6 +32,7 @@ function renderList(selectedTag) {
     .forEach((item) => {
       itemList.append(createCard(item));
     });
+  revealOnScroll(itemList.querySelectorAll(".item-card"), true);
 }
 
 // タグのボタンを、商品データに含まれるタグから自動で作る
@@ -105,6 +106,7 @@ function renderCreators() {
 
     creatorList.append(card);
   });
+  revealOnScroll(creatorList.querySelectorAll(".creator-card"), true);
 }
 
 renderCreators();

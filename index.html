@@ -6,8 +6,40 @@
   <title>ごらてにあ | TRPG向け立ち絵素材</title>
   <meta name="description" content="複数のクリエイターによるTRPG向け素材ショップ「ごらてにあ」の立ち絵紹介サイトです。">
   <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="img/ごらてにあ_キャッチコピー.png">
+  <script>
+    // オープニングは、サイトを開いて最初の1回だけ見せる(詳細ページから戻ったときなどは出さない)
+    try {
+      if (sessionStorage.getItem("opening-shown")) {
+        document.documentElement.classList.add("no-opening");
+      } else {
+        sessionStorage.setItem("opening-shown", "1");
+      }
+    } catch (error) {
+      // 保存できない環境では毎回オープニングを出す
+    }
+  </script>
 </head>
 <body>
+
+  <!-- オープニング:キャッチコピーを画面いっぱいに出してから、サイトに切り替わる -->
+  <div class="opening" aria-hidden="true">
+    <img class="opening__image" id="opening-image" src="img/ごらてにあ_キャッチコピー.png" alt="" width="2032" height="774">
+  </div>
+  <script>
+    // キャッチコピーの画像を読み込み終えてから演出を始める(読み込めなくても3秒で始める)
+    (function () {
+      const image = document.getElementById("opening-image");
+      const start = () => document.documentElement.classList.add("opening-ready");
+      if (image.complete) {
+        start();
+      } else {
+        image.addEventListener("load", start);
+        image.addEventListener("error", start);
+        setTimeout(start, 3000);
+      }
+    })();
+  </script>
 
   <header class="header">
     <div class="header__inner">
